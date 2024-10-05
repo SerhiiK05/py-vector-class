@@ -3,9 +3,9 @@ import math
 
 
 class Vector:
-    def __init__(self, x: float, y: float) -> None:
-        self.x = round(x, 2)
-        self.y = round(y, 2)
+    def __init__(self, x_cord: float, y_cord: float) -> None:
+        self.x = round(x_cord, 2)
+        self.y = round(y_cord, 2)
 
     def __add__(self, other: tuple) -> Vector:
         if isinstance(other, Vector):
@@ -21,8 +21,11 @@ class Vector:
         return Vector(self.x * other, self.y * other)
 
     @classmethod
-    def create_vector_by_two_points(cls, start_point: tuple, end_point: tuple) -> Vector:
-        return cls(end_point[0] - start_point[0], end_point[1] - start_point[1])
+    def create_vector_by_two_points(cls,
+                                    start_point: tuple,
+                                    end_point: tuple) -> Vector:
+        return cls(end_point[0] - start_point[0],
+                   end_point[1] - start_point[1])
 
     def get_length(self) -> float | int:
         return math.sqrt(self.x ** 2 + self.y ** 2)
@@ -33,7 +36,7 @@ class Vector:
             return Vector(0, 0)
         return Vector(self.x / length, self.y / length)
 
-    def angle_between(self, other: tuple | Vector) -> int | tuple | Vector | None:
+    def angle_between(self, other: tuple | Vector) -> tuple | Vector | None:
         dot_product = self * other
         mag_self = self.get_length()
         mag_other = other.get_length()
